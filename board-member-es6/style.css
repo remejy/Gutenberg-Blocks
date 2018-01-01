@@ -1,0 +1,30 @@
+.wp-block-r3m3jy-boardmember-es6 {
+    padding: 1em 0;
+}
+.member-img {
+    width: 20%;
+    float: left;
+}
+.member-name {
+    font-weight: 700;
+    font-size: 2em;
+}
+.member-position {
+    font-style: italic;
+}
+.member-bio {
+    padding-top: 1em;
+}
+.history-title {
+    font-weight: 600;
+    font-size: 1.5em;
+}
+.member-info-pane {
+    width: 80%;
+    padding-left: 1em;
+    float: left;
+}
+.member-history-pane {
+    clear: both;
+    padding-top: 1em;
+}

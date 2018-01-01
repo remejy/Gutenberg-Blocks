@@ -1,0 +1,4 @@
+.member-name:focus, .member-position:focus, .member-bio:focus, .member-history:focus {
+    border: 1px solid grey;
+    padding-left: .5em;
+}
