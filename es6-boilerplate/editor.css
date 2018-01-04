@@ -1,0 +1,12 @@
+/**
+ * editor.css
+ * 
+ * Place styles for the block that are unique to editor mode.
+ * All common styles for the block in either edit or view mode should
+ * be stored in style.css
+ *
+ * Example of style for edit only mode might be a highlight for fields
+ * with a :focus
+ * This would make sense in edit mode, but not while block is viewed by visitor
+ *
+ */
