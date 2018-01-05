@@ -15,3 +15,8 @@ Activate the plugin
 While in edit mode of a post or page, click the plus icon to add a block
 Scroll through all the blocks until you find the Layouts section
 The blocks will be prefaced with 'R3: [name of block]'
+
+## Create your own block
+See the README.md file in the subfolder "es6-boilerplate"
+
+NOTE: Use of this plugin is at your own risk. I make no warranties that this works
