@@ -13,6 +13,7 @@
      Editable,
      InspectorControls,
      MediaUploadButton,
+     Tooltip,
      source: { children },
  } = wp.blocks;
 
@@ -140,19 +141,23 @@
                     </MediaUploadButton>
                 </div>
                 <div className='member-info-pane'>
-                    <Editable
-                        tagName='div'
-                        className='member-name'
-                        placeholder={ __( 'Board Member Name here ... ' ) }
-                        value={ memberName }
-                        onChange={ (newName) => {
-                            setAttributes( {
-                                memberName: newName,
-                            } );
-                        } }
-                        focus={ focusedEditable === 'member-name' ? focus : null }
-                        onFocus={ onFocusName }
-                    />
+                    <Tooltip
+                        text={ __('Board Member Name here ...') }
+                        >
+                        <Editable
+                            tagName='div'
+                            className='member-name'
+                            placeholder={ __( 'Board Member Name here ... ' ) }
+                            value={ memberName }
+                            onChange={ (newName) => {
+                                setAttributes( {
+                                    memberName: newName,
+                                } );
+                            } }
+                            focus={ focusedEditable === 'member-name' ? focus : null }
+                            onFocus={ onFocusName }
+                        />
+                    </Tooltip>
                     <Editable
                         tagName='div'
                         className='member-position'

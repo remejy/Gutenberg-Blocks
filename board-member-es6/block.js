@@ -82,6 +82,7 @@ var _wp$blocks = wp.blocks,
     Editable = _wp$blocks.Editable,
     InspectorControls = _wp$blocks.InspectorControls,
     MediaUploadButton = _wp$blocks.MediaUploadButton,
+    Tooltip = _wp$blocks.Tooltip,
     children = _wp$blocks.source.children;
 
 /**
@@ -228,19 +229,25 @@ registerBlockType('r3m3jy/boardmember-es6', {
             wp.element.createElement(
                 'div',
                 { className: 'member-info-pane' },
-                wp.element.createElement(Editable, {
-                    tagName: 'div',
-                    className: 'member-name',
-                    placeholder: __('Board Member Name here ... '),
-                    value: memberName,
-                    onChange: function onChange(newName) {
-                        setAttributes({
-                            memberName: newName
-                        });
+                wp.element.createElement(
+                    Tooltip,
+                    {
+                        text: __('Board Member Name here ...')
                     },
-                    focus: focusedEditable === 'member-name' ? focus : null,
-                    onFocus: onFocusName
-                }),
+                    wp.element.createElement(Editable, {
+                        tagName: 'div',
+                        className: 'member-name',
+                        placeholder: __('Board Member Name here ... '),
+                        value: memberName,
+                        onChange: function onChange(newName) {
+                            setAttributes({
+                                memberName: newName
+                            });
+                        },
+                        focus: focusedEditable === 'member-name' ? focus : null,
+                        onFocus: onFocusName
+                    })
+                ),
                 wp.element.createElement(Editable, {
                     tagName: 'div',
                     className: 'member-position',
