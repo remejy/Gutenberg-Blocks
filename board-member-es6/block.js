@@ -81,8 +81,10 @@ var _wp$blocks = wp.blocks,
     registerBlockType = _wp$blocks.registerBlockType,
     Editable = _wp$blocks.Editable,
     InspectorControls = _wp$blocks.InspectorControls,
+    RangeControl = _wp$blocks.RangeControl,
     MediaUploadButton = _wp$blocks.MediaUploadButton,
     children = _wp$blocks.source.children;
+var PanelBody = wp.components.PanelBody;
 
 /**
  * Register block
@@ -127,6 +129,10 @@ registerBlockType('r3m3jy/boardmember-es6', {
             selector: '.member-img',
             attribute: 'src'
         },
+        memberImgRadius: {
+            type: 'number',
+            default: 0
+        },
         memberHistory: {
             type: 'array',
             source: 'children',
@@ -150,6 +156,7 @@ registerBlockType('r3m3jy/boardmember-es6', {
         // assign local variables used from the stored attributes of the block
         var memberImgID = attributes.memberImgID,
             memberImgSrc = attributes.memberImgSrc,
+            memberImgRadius = attributes.memberImgRadius,
             memberName = attributes.memberName,
             memberPosition = attributes.memberPosition,
             memberBio = attributes.memberBio,
@@ -201,6 +208,21 @@ registerBlockType('r3m3jy/boardmember-es6', {
                 'p',
                 null,
                 'Enter the board members name, position, a short one or two paragraph biography and include in the history any past positions and years'
+            ),
+            wp.element.createElement(
+                PanelBody,
+                {
+                    title: __('Image Radius') },
+                wp.element.createElement(RangeControl, {
+                    label: __('Radius Size'),
+                    value: memberImgRadius || '',
+                    onChange: function onChange(value) {
+                        return setAttributes({ memberImgRadius: value });
+                    },
+                    min: 0,
+                    max: 50,
+                    allowReset: true
+                })
             )
         ),
 
@@ -222,7 +244,7 @@ registerBlockType('r3m3jy/boardmember-es6', {
                         type: 'image',
                         value: memberImgID
                     },
-                    memberImgID ? wp.element.createElement('img', { src: memberImgSrc }) : __('Upload Image')
+                    memberImgID ? wp.element.createElement('img', { src: memberImgSrc, style: { borderRadius: memberImgRadius } }) : __('Upload Image')
                 )
             ),
             wp.element.createElement(
@@ -309,6 +331,7 @@ registerBlockType('r3m3jy/boardmember-es6', {
 
         // assign local variables used from the stored attributes of the block
         var memberImgSrc = attributes.memberImgSrc,
+            memberImgRadius = attributes.memberImgRadius,
             memberName = attributes.memberName,
             memberPosition = attributes.memberPosition,
             memberBio = attributes.memberBio,
@@ -323,7 +346,7 @@ registerBlockType('r3m3jy/boardmember-es6', {
         wp.element.createElement(
             'div',
             { className: 'board-member' },
-            memberImgSrc && wp.element.createElement('img', { src: memberImgSrc, className: 'member-img' }),
+            memberImgSrc && wp.element.createElement('img', { src: memberImgSrc, style: { borderRadius: memberImgRadius }, className: 'member-img' }),
             wp.element.createElement(
                 'div',
                 { className: 'member-info-pane' },

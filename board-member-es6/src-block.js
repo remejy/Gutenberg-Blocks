@@ -12,9 +12,14 @@
      registerBlockType,
      Editable,
      InspectorControls,
+     RangeControl,
      MediaUploadButton,
      source: { children },
  } = wp.blocks;
+ 
+ const {
+     PanelBody,
+ } = wp.components;
 
 /**
  * Register block
@@ -58,6 +63,10 @@
             selector: '.member-img',
             attribute: 'src',
         },
+        memberImgRadius: {
+            type: 'number',
+            default: 0,
+        },
         memberHistory: {
             type: 'array',
             source: 'children',
@@ -76,6 +85,7 @@
         const { 
             memberImgID,
             memberImgSrc, 
+            memberImgRadius,
             memberName,
             memberPosition,
             memberBio,
@@ -118,7 +128,19 @@
             focus && (
                 <InspectorControls key='inspector'>
                     <h2>Board Member Bio</h2>
-                    <p>Enter the board members name, position, a short one or two paragraph biography and include in the history any past positions and years</p>
+                    <p>Enter the board members name, position, a short one or two paragraph biography and
+                         include in the history any past positions and years</p>
+                    <PanelBody 
+                        title={ __('Image Radius') } >
+                        <RangeControl
+                            label={ __('Radius Size') }
+                            value={ memberImgRadius || '' }
+                            onChange={ ( value ) => setAttributes( { memberImgRadius: value } ) }
+                            min={ 0 }
+                            max={ 50 }
+                            allowReset
+                        />
+                    </PanelBody>
                 </InspectorControls>
             ),
 
@@ -136,7 +158,7 @@
                         type='image'
                         value={ memberImgID }
                     >
-                        { memberImgID ? <img src={ memberImgSrc} /> : __( 'Upload Image' ) }
+                        { memberImgID ? <img src={ memberImgSrc} style={ { borderRadius: memberImgRadius, } }/> : __( 'Upload Image' ) }
                     </MediaUploadButton>
                 </div>
                 <div className='member-info-pane'>
@@ -213,7 +235,8 @@
         
         // assign local variables used from the stored attributes of the block
         const { 
-            memberImgSrc, 
+            memberImgSrc,
+            memberImgRadius,
             memberName,
             memberPosition,
             memberBio,
@@ -226,7 +249,7 @@
             // this view should mirror what is in edit mode, but instead of
             // using the Editable components, just display the saved data
             <div className='board-member'>
-                { memberImgSrc && <img src={memberImgSrc} className='member-img' /> }
+                { memberImgSrc && <img src={ memberImgSrc } style={ {borderRadius: memberImgRadius,} } className='member-img' /> }
                 <div className='member-info-pane'>
                     <div className='member-name'>{ memberName }</div>
                     <div className='member-position'>{ memberPosition }</div>
